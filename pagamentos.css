@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
+:root {
+  --cor-fundo: #f0ece1;
+  --cor-titulo: #2e2e2e;
+  --cor-texto: rgba(46, 46, 46, 0.8);
+  --cor-ativo: #6b8e4e;
+  --cor-digitacao-input-e-select: black;
+
+}
+
+.darkMode {
+  --cor-fundo: #2e2e2e;
+  --cor-titulo: #f0ece1;
+  --cor-texto: rgba(240, 236, 225, 0.8);
+  --cor-ativo: #86c84e;
+  --cor-digitacao-input-e-select: #f0ece1;
+
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  bottom: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  height: auto;
+}
+
+main {
+    background: var(--cor-fundo);
+}
+
+.administrador {
+  display: flex;
+  gap: 1rem;
+  padding-right: 12rem;
+  background: transparent;
+  border: none;
+  img {
+    width: 3.8rem;
+    height: 3.8rem;
+    border-radius: 0.5rem;
+  }
+
+  div {
+    p:nth-child(1) {
+      color: var(--cor-titulo);
+      font-family: "Geist", sans-serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+    }
+
+    p:last-child {
+      color: var(--cor-texto);
+      font-family: "Geist", sans-serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+    }
+  }
+}
+
+#painel-pagamentos {
+  width: calc(100% - 8rem);
+  margin-left: 8rem;
+  min-height: 100vh;
+  height: auto;
+}
+
+#texto-principal {
+  padding: 5rem 0 0 6rem;
+  display: flex;
+  h1 {
+    color: var(--cor-titulo);
+    font-family: "Geist", sans-serif;
+    font-size: 3.5rem;
+    font-weight: 500;
+  }
+
+  hr {
+    width: 62.2rem;
+    height: 0.4rem;
+    border-radius: 1rem;
+    background: #6b8e4e;
+    margin-top: 0.5rem;
+    border: none;
+  }
+  p {
+    width: 68.6rem;
+    color: var(--cor-texto);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-top: 1rem;
+  }
+}
+
+#informacoes-gerais {
+  display: flex;
+  gap: 3rem;
+  margin-left: 6rem;
+  margin-top: 4rem;
+  div {
+    width: 43.1rem;
+    height: 8.1rem;
+    border-radius: 1rem;
+    background: #405d49;
+    display: flex;
+    align-items: center;
+    color: #f0ece1;
+    font-family: Geist;
+    font-size: 1.8rem;
+    font-weight: 600;
+
+    h2 {
+      margin-left: 2.5rem;
+    }
+  }
+}
+
+table {
+    width: 99.7rem;
+  border-collapse: collapse;
+  margin-left: 6rem;
+  margin-top: 7rem;
+  thead {
+    width: 99.7rem;
+    height: 5rem;
+    background: rgba(176, 186, 195, 0.40);
+  }
+
+  tr,
+  td {
+    padding: 1.5rem 3rem;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--cor-texto);
+  }
+}

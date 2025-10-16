@@ -1,0 +1,107 @@
+:root {
+  --cor-fundo: #f0ece1;
+  --cor-titulo: #2e2e2e;
+  --cor-texto: rgba(46, 46, 46, 0.8);
+  --cor-ativo: #6b8e4e;
+  --cor-digitacao-input-e-select: black;
+
+  /* VARIAVEIS DE CORES PARA OS FORMULARIOS */
+  --cor-fundo-form: white;
+  --cor-titulo-form: #2e2e2e;
+  --cor-input: rgba(46, 46, 46, 0.9);
+  --cor-input-placeholder: rgba(46, 46, 46, 0.3);
+  --cor-fundo-input: #fff;
+  --cancelar-hover: #eeee;
+  --borda-adicionar-editar-funcionario: rgba(46, 46, 46, 0.64);
+}
+
+.darkMode {
+  --cor-fundo: #2e2e2e;
+  --cor-titulo: #f0ece1;
+  --cor-texto: rgba(240, 236, 225, 0.8);
+  --cor-ativo: #86c84e;
+  --cor-digitacao-input-e-select: #f0ece1;
+
+  /* VARIAVEIS DE CORES PARA OS FORMULARIOS */
+  --cor-fundo-form: #2e2e2e;
+  --cor-titulo-form: #fff;
+  --cor-input: rgba(240, 236, 225, 0.9);
+  --cor-input-placeholder: rgba(255, 255, 255, 0.3);
+  --cor-fundo-input: #2e2e2e;
+  --cancelar-hover: #eeeeee4d;
+  --borda-adicionar-editar-funcionario: rgba(240, 236, 225, 0.64);
+}
+
+#configuracoes {
+  width: calc(100% - 8rem);
+  margin-left: 8rem;
+  height: 91.2vh;
+
+  #texto-principal {
+    padding: 5rem 0 0 6rem;
+    display: flex;
+    h1 {
+      color: var(--cor-titulo);
+      font-family: "Geist", sans-serif;
+      font-size: 3.5rem;
+      font-weight: 500;
+    }
+
+    hr {
+      width: 62.2rem;
+      height: 0.4rem;
+      border-radius: 1rem;
+      background: #6b8e4e;
+      margin-top: 0.5rem;
+      border: none;
+    }
+  }
+}
+
+form {
+  margin-top: 3rem;
+  /* container para imagem e botão */
+  #imagem-container {
+    position: relative; /* importante */
+    display: inline-block;
+
+    img {
+      width: 15.3rem;
+      height: 15.3rem;
+      aspect-ratio: 1/1;
+      border-radius: 15.3rem;
+      object-fit: cover;
+      display: block;
+    }
+
+    label[for="inputFile"] {
+      width: 3.9rem;
+      height: 3.9rem;
+      background-color: #d6d8d5;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+
+      i {
+        color: #2e2e2e;
+        font-size: 2rem;
+      }
+    }
+
+    label[for="inputNome"] {
+      color: #2e2e2e;
+      font-size: 2.6rem;
+      font-weight: 600;
+    }
+  }
+
+  #inputFile {
+    display: none;
+  }
+}
