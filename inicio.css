@@ -1,0 +1,164 @@
+:root {
+  --cor-fundo: #f0ece1;
+  --cor-titulo: #2e2e2e;
+  --cor-texto: rgba(46, 46, 46, 0.8);
+  --cor-texto-secundario: #747474;
+  --cor-digitacao-e-input: rgba(46, 46, 46, 0.8);
+  --cor-fundo-industria: #e6e2d6;
+  --cor-hover: rgba(46, 46, 46, 0.15);
+
+}
+
+.darkMode {
+  --cor-fundo: #2e2e2e;
+  --cor-titulo: #f0ece1;
+  --cor-texto: rgba(240, 236, 225, 0.8);
+  --cor-texto-secundario: rgba(240, 236, 225, 0.6);
+  --cor-digitacao-e-input: rgba(240, 236, 225, 0.8);
+  --cor-fundo-industria: #4a4a4a;
+  --cor-hover: rgba(240, 236, 225, 0.15);
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  bottom: 0;
+}
+
+/* Conteúdo principal */
+main {
+  height: 100vh;
+}
+#inicio {
+  width: calc(100% - 8rem);
+  margin-left: 8rem;
+  display: flex;
+  gap: 6rem;
+}
+
+#cards-infos-gerais {
+  display: flex;
+  gap: 3.5rem;
+  margin-left: 6rem;
+  margin-top: 3rem;
+  div {
+    width: 38rem;
+    height: 15.7rem;
+    border-radius: 1rem;
+    background: #405d49;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.7rem;
+
+    h3 {
+      color: #f0ece1;
+      font-family: Geist;
+      font-size: 2.3rem;
+      font-weight: 600;
+      margin-left: 2rem;
+    }
+
+    h2 {
+      color: #f0ece1;
+      font-family: Geist;
+      font-size: 4rem;
+      font-weight: 400;
+      margin-left: 2rem;
+    }
+  }
+}
+
+#acoes {
+  display: flex;
+  gap: 8rem;
+  margin-left: 6rem;
+  margin-top: 3rem;
+
+  div {
+    width: 32.1rem;
+    height: 14.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    background: var(--cor-fundo-industria);
+    border-radius: 2rem;
+    transition: .3s ease;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: .6rem .5rem 1rem var(--cor-hover);
+    }
+
+    i {
+      width: 7rem;
+      height: 7rem;
+      border-radius: 7rem;
+      background: #405d49;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f0ece1;
+      font-size: 3rem;
+    }
+
+    h3 {
+      color: var(--cor-texto);
+      font-size: 2.6rem;
+      font-weight: 600;
+      width: 14rem;
+    }
+  }
+}
+
+#card-industria {
+  width: 46.4rem;
+  height: 51.9rem;
+  background: var(--cor-fundo-industria);
+  margin-top: 14rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  > div {
+    margin-left: 2.5rem;
+  }
+
+  h4 {
+    color: var(--cor-titulo);
+    font-family: Geist;
+    font-size: 2.3rem;
+    font-weight: 600;
+  }
+
+  p {
+    color: var(--cor-texto-secundario);
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  > div:nth-child(1) {
+    margin-top: 2.8rem;
+    display: flex;
+    gap: 3rem;
+    img {
+      width: 13.6rem;
+      height: 13.6rem;
+      aspect-ratio: 1/1;
+      border-radius: 13.6rem;
+    }
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+  }
+}
