@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
+body {
+  background-color: #f0ece1;
+  display: flex;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  bottom: 0;
+}
+
+#sidebar-exemplo {
+  width: 500px;
+  height: 100vh;
+  background-color: #405d49;
+}
+
+#chat-container {
+  width: calc(100% - 500px);
+  height: 100vh;
+}
+
+#mensagens {
+  width: 100%;
+  height: 90%;
+  overflow: auto;
+  padding-bottom: 20px;
+}
+
+.mensagem-usuario {
+  background-color: #405d49;
+  width: 30%;
+  margin-left: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  color: #f0ece1;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  padding: 20px;
+  text-align: left;
+  line-break: anywhere;
+
+
+  small {
+    color: #f0ece190;
+  }
+}
+
+.mensagem-vit {
+  background: #6b8e4e;
+  margin-top: 20px;
+  width: 30%;
+  margin-left: 20px;
+  border-radius: 10px;
+  color: #f0ece1;
+  padding: 20px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 160%;
+}
+
+.carregamento {
+  width: 15%;
+  background-color: #d9d9d9;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 20px;
+  margin-top: 20px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+#mandar-mensagem {
+    width: 95%;
+    height: auto;
+    justify-self: center;
+
+    input {
+        border-radius: 20px;
+        border: 1px solid #405d4970;
+        height: 40px;
+        padding-left: 20px;
+        width: 40%;
+        background-color: transparent;
+    }
+
+    button {
+        width: 100px;
+        height: 40px;
+        color: #f0ece1;
+        background-color: #405d49;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+    }
+}
+

@@ -16,7 +16,6 @@
   --cor-fundo-input: #fff;
   --cancelar-hover: #eeee;
   --borda-adicionar-editar-funcionario: rgba(46, 46, 46, 0.64);
-  
 }
 
 .darkMode {
@@ -30,12 +29,11 @@
   --cor-fundo-form: #2e2e2e;
   --cor-titulo-form: #fff;
   --cor-input: rgba(240, 236, 225, 0.9);
-  --cor-input-placeholder: rgba(255, 255, 255, 0.30);
+  --cor-input-placeholder: rgba(255, 255, 255, 0.3);
   --cor-fundo-input: #2e2e2e;
   --cancelar-hover: #eeeeee4d;
-  --borda-adicionar-editar-funcionario: rgba(240, 236, 225, 0.64); 
+  --borda-adicionar-editar-funcionario: rgba(240, 236, 225, 0.64);
 }
-
 
 html {
   font-size: 62.5%;
@@ -54,13 +52,10 @@ body {
   height: auto;
 }
 
-
 /* Conteúdo principal */
 main {
   background: var(--cor-fundo);
 }
-
-
 
 #painel-funcionarios {
   width: calc(100% - 8rem);
@@ -84,7 +79,7 @@ main {
       height: 0.4rem;
       border-radius: 1rem;
       background: #6b8e4e;
-      margin-top: 0.5rem;
+      margin-top: 0.1rem;
       border: none;
     }
     p {
@@ -133,30 +128,14 @@ main {
   #tabela-funcionarios {
     width: 121rem;
     justify-self: center;
-    margin-top: 10.7rem;
+    margin-top: 5rem;
   }
 
   #tabela-funcionarios .topo {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     margin-bottom: 4rem;
     position: relative;
-  }
-
-  #tabela-funcionarios input[type="search"] {
-    width: 36.4rem;
-    height: 4rem;
-    border-radius: 1rem;
-    background: rgba(176, 186, 195, 0.4);
-    border: none;
-    padding-left: 1.8rem;
-    color: var(--cor-digitacao-input-e-select);
-    font-size: 1.7rem;
-    font-weight: 400;
-
-    &::-webkit-search-cancel-button {
-      display: none;
-    }
   }
 
   .dark {
@@ -170,21 +149,6 @@ main {
     input::placeholder {
       color: #f0ece180;
     }
-  }
-
-  .topo > i {
-    position: absolute;
-    font-size: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #405d49;
-    left: 33rem;
-    cursor: pointer;
-  }
-
-  #tabela-funcionarios input[type="search"]:focus {
-    outline-color: #405d49;
-    outline-width: 1px;
   }
 
   #tabela-funcionarios button {
@@ -211,7 +175,7 @@ main {
 
   #tabela-funcionarios thead {
     background: rgba(176, 186, 195, 0.4);
-    width: 100%;
+    width: 80%;
     height: 4.6rem;
     border-radius: 0.5rem 0.5rem 0 0;
     gap: 30px;
@@ -230,6 +194,7 @@ main {
     transition: 0.3s ease;
     cursor: pointer;
     z-index: 998;
+    width: 121rem;
   }
 
   #tabela-funcionarios tbody tr:hover {
@@ -282,7 +247,7 @@ main {
     transform: translate(-50%, -50%);
 
     hr {
-      margin-top: 1rem;
+      margin-top: 2.5rem;
       width: 99.65%;
       color: var(--cor-titulo-form);
     }
@@ -414,7 +379,8 @@ main {
 .acoesForm {
   display: flex;
   justify-content: space-between;
-  margin: 1.6rem 4rem 0 3rem;
+  padding-top: 1rem;
+  margin: 0 4rem 0 3rem;
 
   button:nth-child(1) {
     width: 8.4rem;
@@ -464,7 +430,7 @@ main {
   z-index: 1000;
   form {
     width: 57rem;
-    height: 60rem;
+    height: 45rem;
     border-radius: 1.5rem;
     background: var(--cor-fundo-form);
     position: fixed;
@@ -473,7 +439,7 @@ main {
     transform: translate(-50%, -50%);
 
     hr {
-      margin-top: 1rem;
+      margin-top: 2.5rem;
       width: 99.65%;
       color: var(--cor-titulo-form);
     }
@@ -559,10 +525,9 @@ main {
   grid-template-columns: 1fr 1fr;
   width: 50rem;
   margin-left: 3rem;
-  gap: 0.5rem 2rem;
+  gap: 0 2rem;
   font-family: "Geist", sans-serif;
   color: #444;
-  width: 50rem;
 }
 
 .inputs label {
@@ -587,7 +552,6 @@ main {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-
 .inputs input::placeholder {
   color: var(--cor-input-placeholder);
   display: flex;
@@ -604,7 +568,8 @@ main {
 .acoesForm {
   display: flex;
   justify-content: space-between;
-  margin: 1.6rem 4rem 0 3rem;
+  padding-top: 1rem;
+  margin: 0 4rem 0 3rem;
 
   button:nth-child(1) {
     width: 8.4rem;
@@ -695,7 +660,7 @@ main {
         color: var(--cor-input);
         font-size: 1.3rem;
         font-weight: 400;
-        transition: .3s ease;
+        transition: 0.3s ease;
 
         &:hover {
           background: var(--cancelar-hover);
@@ -712,7 +677,7 @@ main {
         font-size: 1.3rem;
         font-weight: 600;
         cursor: pointer;
-        transition: .3s ease;
+        transition: 0.3s ease;
         &:hover {
           background-color: #c84d23;
         }

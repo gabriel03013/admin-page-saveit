@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Funcionários</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            color: #333;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
+
+        .botao-deletar-funcionario {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .botao-deletar-funcionario:hover {
+            background-color: #ffe6e6;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .funcionario-status.ativo {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .funcionario-status.inativo {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Contratação</th>
+                <th>ID</th>
+                <th>Cargo</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-funcionario='{"nome":"Nisflei Galoni","dataContratacao":"27/01/2021","id":"1","cargo":"Professor","status":"Ativo"}'>
+                <td class="nome-fun">Nisflei Galoni</td>
+                <td class="data-fun">27/01/2021</td>
+                <td class="id-fun">1</td>
+                <td class="cargo-fun">Professor</td>
+                <td class="funcionario-status ativo">Ativo</td>
+                <td class="acoes">
+                    <button class="botao-deletar-funcionario">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr data-funcionario='{"nome":"Myrna Yoshie","dataContratacao":"21/01/2022","id":"2","cargo":"Professor","status":"Ativo"}'>
+                <td>Myrna Yoshie</td>
+                <td>21/01/2022</td>
+                <td>2</td>
+                <td>Professor</td>
+                <td class="funcionario-status ativo">Ativo</td>
+                <td class="acoes">
+                    <button class="botao-deletar-funcionario">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr data-funcionario='{"nome":"Carlos Santi","dataContratacao":"14/01/2021","id":"3","cargo":"Professor","status":"Ativo"}'>
+                <td>Carlos Santi</td>
+                <td>14/01/2021</td>
+                <td>3</td>
+                <td>Professor</td>
+                <td class="funcionario-status ativo">Ativo</td>
+                <td class="acoes">
+                    <button class="botao-deletar-funcionario">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr data-funcionario='{"nome":"Bruno Baptista","dataContratacao":"20/02/2018","id":"4","cargo":"Professor","status":"Ativo"}'>
+                <td>Bruno Baptista</td>
+                <td>20/02/2018</td>
+                <td>4</td>
+                <td>Professor</td>
+                <td class="funcionario-status ativo">Ativo</td>
+                <td class="acoes">
+                    <button class="botao-deletar-funcionario">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr data-funcionario='{"nome":"Marcelo Modolo","dataContratacao":"18/01/2019","id":"5","cargo":"Professor","status":"Inativo"}'>
+                <td>Marcelo Modolo</td>
+                <td>18/01/2019</td>
+                <td>5</td>
+                <td>Professor</td>
+                <td class="funcionario-status inativo">Inativo</td>
+                <td class="acoes">
+                    <button class="botao-deletar-funcionario">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr data-funcionario='{"nome":"Carlos Alberto","dataContratacao":"28/02/2024","id":"6","cargo":"Professor","status":"Inativo"}'>
+                <td>Carlos Alberto</td>
+                <td>28/02/2024</td>
+                <td>6</td>
+                <td>Professor</td>
+                <td class="funcionario-status inativo">Inativo</td>
+                <td class="acoes">
+                    <button class="botao-deletar-funcionario">
+                        <i class="ri-delete-bin-6-line"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal de Edição -->
+    <div id="modalEdicao" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Funcionário</h2>
+            <form id="formEdicao">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="dataContratacao">Data de Contratação:</label>
+                    <input type="text" id="dataContratacao" name="dataContratacao" required>
+                </div>
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" name="id" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="cargo">Cargo:</label>
+                    <input type="text" id="cargo" name="cargo" required>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="Ativo">Ativo</option>
+                        <option value="Inativo">Inativo</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Elementos do modal
+        const modal = document.getElementById('modalEdicao');
+        const closeBtn = document.querySelector('.close');
+        const cancelBtn = document.getElementById('btnCancelar');
+        const form = document.getElementById('formEdicao');
+
+        // Adiciona evento de clique nas linhas da tabela
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', (e) => {
+                // Impede a abertura do modal se clicar no botão de deletar
+                if (e.target.closest('.botao-deletar-funcionario')) {
+                    return;
+                }
+                
+                // Obtém os dados do funcionário do atributo data-funcionario
+                const funcionarioData = JSON.parse(row.getAttribute('data-funcionario'));
+                
+                // Preenche o formulário com os dados do funcionário
+                document.getElementById('nome').value = funcionarioData.nome;
+                document.getElementById('dataContratacao').value = funcionarioData.dataContratacao;
+                document.getElementById('id').value = funcionarioData.id;
+                document.getElementById('cargo').value = funcionarioData.cargo;
+                document.getElementById('status').value = funcionarioData.status;
+                
+                // Armazena a linha atual para atualização posterior
+                form.setAttribute('data-current-row', row.rowIndex - 1);
+                
+                // Abre o modal
+                modal.style.display = 'block';
+            });
+        });
+
+        // Fecha o modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+
+        // Fecha o modal se clicar fora dele
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Manipula o envio do formulário
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Obtém os dados do formulário
+            const formData = new FormData(form);
+            const rowIndex = form.getAttribute('data-current-row');
+            const rows = document.querySelectorAll('tbody tr');
+            
+            // Atualiza a linha da tabela
+            if (rowIndex !== null && rows[rowIndex]) {
+                const row = rows[rowIndex];
+                
+                // Atualiza os dados na linha
+                row.cells[0].textContent = formData.get('nome');
+                row.cells[1].textContent = formData.get('dataContratacao');
+                row.cells[2].textContent = formData.get('id');
+                row.cells[3].textContent = formData.get('cargo');
+                row.cells[4].textContent = formData.get('status');
+                
+                // Atualiza as classes de status
+                row.cells[4].className = 'funcionario-status ' + 
+                    (formData.get('status') === 'Ativo' ? 'ativo' : 'inativo');
+                
+                // Atualiza o atributo data-funcionario
+                const updatedData = {
+                    nome: formData.get('nome'),
+                    dataContratacao: formData.get('dataContratacao'),
+                    id: formData.get('id'),
+                    cargo: formData.get('cargo'),
+                    status: formData.get('status')
+                };
+                row.setAttribute('data-funcionario', JSON.stringify(updatedData));
+            }
+            
+            // Aqui você pode adicionar uma chamada AJAX para salvar no servidor
+            console.log('Dados atualizados:', {
+                nome: formData.get('nome'),
+                dataContratacao: formData.get('dataContratacao'),
+                id: formData.get('id'),
+                cargo: formData.get('cargo'),
+                status: formData.get('status')
+            });
+            
+            closeModal();
+        });
+
+        // Eventos para os botões de deletar
+        document.querySelectorAll('.botao-deletar-funcionario').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Impede a abertura do modal
+                const row = e.target.closest('tr');
+                const nome = row.cells[0].textContent;
+                
+                if (confirm(`Tem certeza que deseja excluir o funcionário ${nome}?`)) {
+                    row.remove();
+                    // Aqui você pode adicionar uma chamada AJAX para deletar no servidor
+                    console.log('Funcionário excluído:', nome);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

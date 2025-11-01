@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Configurações - Essentia</title>
     <link rel="stylesheet" href="global.css">
     <link rel="stylesheet" href="configuracoes.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
@@ -106,12 +106,33 @@
                     </label>
                     <input type="email" id="inputEmail" name="inputFile" disabled
                         value="marcelo.grilo@germinare.org.br">
+                    
+                    <div id="senhas-extra" style="display: none;">
+                        <label for="inputSenhaAntiga">Senha Antiga
+                        </label>
+                        <div class="password-container">
+                            <input type="password" id="inputSenhaAntiga" name="inputSenhaAntiga" placeholder="Digite sua senha atual">
+                            <button type="button" class="toggle-password" data-target="inputSenhaAntiga">
+                                <i class="ri-eye-line"></i>
+                            </button>
+                        </div>
+                        
+                        <label for="inputSenhaNovaConfirmar">Confirmar Nova Senha
+                        </label>
+                        <div class="password-container">
+                            <input type="password" id="inputSenhaNovaConfirmar" name="inputSenhaNovaConfirmar" placeholder="Confirme a nova senha">
+                            <button type="button" class="toggle-password" data-target="inputSenhaNovaConfirmar">
+                                <i class="ri-eye-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
                     <label for="inputSenha">Senha
                     </label>
                     <input type="password" id="inputSenha" name="inputSenha" disabled value="senha123">
 
                     <div>
-                        <button type="submit">Salvar Alterações</button>
+                        <button type="submit" id="botao-salvar" disabled>Salvar Alterações</button>
 
                         <button type="button" id="botao-cancelar">Cancelar</button>
 

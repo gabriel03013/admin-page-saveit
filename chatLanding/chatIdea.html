@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Chat — Apenas minhas mensagens</title>
+    <style>
+        :root {
+            --bg: #0f1724;
+            --panel: #0b1220;
+            --bubble: #0ea5a0;
+            --bubbleText: #012;
+            --muted: #94a3b8
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial
+        }
+
+        body {
+            background: linear-gradient(180deg, #071024 0%, var(--bg) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px
+        }
+
+        .chat-wrap {
+            width: 100%;
+            max-width: 720px;
+            height: 640px;
+            background: var(--panel);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6)
+        }
+
+        header {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            color: #e6eef6
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 16px;
+            letter-spacing: 0.2px;
+            font-weight: 600
+        }
+
+        header p {
+            margin: 4px 0 0 0;
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .messages {
+            flex: 1;
+            padding: 18px;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px
+        }
+
+        /* user bubble (only type used) */
+        .bubble {
+            align-self: flex-end;
+            max-width: 78%;
+            padding: 12px 14px;
+            border-radius: 16px;
+            border-bottom-right-radius: 6px;
+            background: linear-gradient(135deg, var(--bubble) 0%, #06b6b0 100%);
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 6px 18px rgba(10, 20, 30, 0.35)
+        }
+
+        .bubble small {
+            display: block;
+            margin-top: 6px;
+            font-weight: 600;
+            opacity: 0.85;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.9)
+        }
+
+        /* input area */
+        .composer {
+            display: flex;
+            padding: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            gap: 8px
+        }
+
+        .composer input {
+            flex: 1;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(255, 255, 255, 0.02);
+            color: #e6eef6;
+            outline: none;
+            font-size: 14px
+        }
+
+        .composer button {
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: none;
+            background: #06b6b0;
+            color: #022;
+            cursor: pointer;
+            font-weight: 700
+        }
+
+        .composer button:active {
+            transform: translateY(1px)
+        }
+
+        .hint {
+            font-size: 12px;
+            color: var(--muted);
+            padding: 8px 16px
+        }
+
+        /* empty state */
+        .empty {
+            margin: auto;
+            text-align: center;
+            color: var(--muted)
+        }
+
+        .empty strong {
+            color: #e6eef6
+        }
+
+        @media (max-width:420px) {
+            .chat-wrap {
+                height: 88vh;
+                border-radius: 8px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat-wrap" role="application" aria-label="Chat apenas minhas mensagens">
+        <header>
+            <h1>Chat (apenas suas mensagens)</h1>
+            <p>Digite e envie — apenas suas mensagens aparecem aqui.</p>
+        </header>
+
+        <div class="messages" id="messages" aria-live="polite">
+            <div class="empty" id="empty">
+                <p><strong>Ainda não há mensagens</strong></p>
+                <p class="hint">Digite algo na caixa abaixo e pressione Enter ou clique em Enviar.</p>
+            </div>
+        </div>
+
+        <div class="composer">
+            <input id="input" placeholder="Escreva sua mensagem... (Enter para enviar)"
+                aria-label="Escreva sua mensagem" autocomplete="off" />
+            <button id="send">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const input = document.getElementById('input');
+            const sendBtn = document.getElementById('send');
+            const messages = document.getElementById('messages');
+            const empty = document.getElementById('empty');
+
+            // helper: create a user bubble
+            function makeBubble(text) {
+                const div = document.createElement('div');
+                div.className = 'bubble';
+                div.innerHTML = escapeHtml(text) + '<small>' + timeNow() + '</small>';
+                return div;
+            }
+
+            function timeNow() {
+                const d = new Date();
+                return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
+            // simple escaping to avoid injection
+            function escapeHtml(s) {
+                return String(s)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#039;');
+            }
+
+            function appendMessage(text) {
+                if (!text || !text.trim()) return;
+                // remove empty state
+                if (empty) empty.remove();
+                const bubble = makeBubble(text.trim());
+                messages.appendChild(bubble);
+                // keep newest visible
+                bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+            }
+
+            // send action
+            function send() {
+                appendMessage(input.value);
+                input.value = '';
+                input.focus();
+            }
+
+            // events
+            sendBtn.addEventListener('click', send);
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    send();
+                }
+            });
+
+            // optional: paste recent history from sessionStorage (keeps only user's messages)
+            // We'll keep an array of messages (texts) and restore them on reload.
+            const STORAGE_KEY = 'chat_only_user_msgs_v1';
+            function saveState() {
+                const arr = Array.from(messages.querySelectorAll('.bubble')).map(b => b.firstChild.nodeValue || b.textContent);
+                try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); } catch (e) { }
+            }
+            function restoreState() {
+                try {
+                    const raw = sessionStorage.getItem(STORAGE_KEY);
+                    if (!raw) return;
+                    const arr = JSON.parse(raw);
+                    if (!Array.isArray(arr)) return;
+                    // clear empty
+                    if (empty) empty.remove();
+                    arr.forEach(text => {
+                        const bubble = makeBubble(text);
+                        messages.appendChild(bubble);
+                    });
+                } catch (e) { }
+            }
+
+            // autosave every few seconds
+            setInterval(saveState, 2000);
+            // also save on unload
+            window.addEventListener('beforeunload', saveState);
+
+            // after sending, also update session storage
+            const origAppend = appendMessage;
+            appendMessage = function (text) { origAppend(text); saveState(); };
+
+            // init
+            restoreState();
+
+        })();
+    </script>
+</body>
+
+</html>
